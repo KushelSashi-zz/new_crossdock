@@ -1,0 +1,7 @@
+(SELECT poi.*, poii.movement_count, IF(poii.movement_count>1, 1, 0) as is_superseller
+FROM `noondwh.purchase_v2.purchase_order_item` poi
+LEFT JOIN (select id_sales_order_item, count(id_sales_order_item) as movement_count, max(created_at) as max_created_at, 
+min(created_at) as min_created_at
+FROM `noondwh.purchase_v2.purchase_order_item` group by 1) poii on
+poi.id_sales_order_item=poii.id_sales_order_item and poi.created_at=poii.max_created_at
+)
