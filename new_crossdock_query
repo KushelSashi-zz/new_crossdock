@@ -1,3 +1,4 @@
 Select
 
 From `noobimkops.purchase.purchase_item_clean`
+LIMIT 1000
